@@ -1,0 +1,24 @@
+{
+  "name": "amazon-storefront",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khayes8/amazon-storefront.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/khayes8/amazon-storefront/issues"
+  },
+  "homepage": "https://github.com/khayes8/amazon-storefront#readme",
+  "dependencies": {
+    "inquirer": "^3.2.3",
+    "mysql": "^2.14.1"
+  }
+}
