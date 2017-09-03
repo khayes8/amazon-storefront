@@ -42,18 +42,18 @@ function takeOrder (){
     },
 		])
 	 .then(function(answer) {
-    // If the inquirerResponse confirms, we displays the inquirerResponse's username and pokemon from the answers.
-    // if (inquirerResponse.confirm) {
-    //   console.log("\nWelcome " + inquirerResponse.username);
-    //   console.log("Your " + inquirerResponse.pokemon + " is ready for battle!\n");
-    // }
-    // else {
-    //   console.log("\nThat's okay " + inquirerResponse.username + ", come again when you are more sure.\n");
-    // }
+
     console.log(answer);
   });
 }
 
 
 /* 
+CONDITIONS
+if input value for product is an two integer:
+if input value for product id is not an integer:
+if id of product is correct and there is enough of product, place an order
+place an order = store that info into an order array? 
+if id is incorrect:
+if order is out of stock:
 */
