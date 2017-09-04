@@ -13,39 +13,57 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err, res) {
   if (err) throw err;
-  console.log("connected as id " + connection.threadId);
-
-  // showProductsTable();
-  takeOrder();
+  // selectAll();
+  inputOrder();
   
   });
 
-// function showProductsTable(err){
+// function selectAll(){
 // 	connection.query("SELECT * FROM products", function(err, res) {
 //     if (err) throw err;
-//     console.log("Products Available:");
 //     console.log(res);
 // });
 // };
 
-function takeOrder (){
+function inputOrder (){
 	inquirer.prompt ([
 		{
       type: "input",
       message: "What is the ID of the product that you would like to buy?",
-      name: "productID"
+      name: "id"
     	},
     	 {
       type: "input",
       message: "How many items of this product would you like to buy?",
-      name: "productAmount"
+      name: "amt"
     },
 		])
 	 .then(function(answer) {
-
-    console.log(answer);
+	connection.query("SELECT * FROM songs WHERE id=?", [answer.id], function(err, res) {
+    //   for (var i = 0; i < res.length; i++) {
+    // console.log(res[i].id + " | " + res[i].product_name);
+    console.log(answer.id);
+    })
   });
+};
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* 
