@@ -39,13 +39,14 @@ function inputOrder (){
     },
 		])
 	 .then(function(answer) {
-	connection.query("SELECT * FROM songs WHERE id=?", [answer.id], function(err, res) {
-    //  input code where for what you want to do with id. 
-    console.log(answer.id);
+	connection.query("SELECT * FROM products WHERE id=?", [answer.id], function(err, res) {
+		for (var i = 0; i < res.length; i++) {
+      console.log(res[i].id + " | " + res[i].item_id + " | " + res[i].product_name + " | " + res[i].department_name);
+    }
     })
   });
 };
-}
+
 
 
 
