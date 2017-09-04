@@ -43,13 +43,19 @@ function inputOrder (){
 		var price = "$" +(answer.amt * res[i].price)+ ".00";
 		var item = res[i].product_name;
 		var itemID = answer.id;
-		var amount = answer.amt;
+		var amountRequested = answer.amt;
+		var amountInStock= res[i].stock_quantity;
      	// console.log(res[i].id + " | " + res[i].item_id + " | " + res[i].product_name + " | " + res[i].department_name + " | " + res[i].price + " | " + res[i].stock_quantity);
      	// console.log("----------------------------------------------")
      	// console.log("Your Order: ")
      	// console.log("Item: " + res[i].product_name + "\nPrice: " + price);
-
-     	placeOrder(item, amount, price, itemID);
+     	if (amountRequested > amountInStock){
+		console.log("Insufficient Quantity");
+		inputOrder();
+		}
+		else {
+     	placeOrder(item, amountRequested, amountInStock, price, itemID);
+     }
       	// if (answer.amt > res[i].stock_quantity){
       	// 	console.log("insufficient quantity");
       	// }
@@ -58,10 +64,10 @@ function inputOrder (){
   });
 };
 
-function placeOrder(item, amount, price, itemID){
+function placeOrder(item, amountRequested, amountInStock, price, itemID){	
 	var order = {
 		item: item,
-		amount: amount,
+		amount: amountRequested,
 		price: price,
 		id: itemID
 	}
@@ -71,6 +77,9 @@ function placeOrder(item, amount, price, itemID){
 	console.log(orderArr);
 }
 
+function updateDatebase (item, amountRequested, amountInStock, price, itemID){
+	
+}
 
 
 
