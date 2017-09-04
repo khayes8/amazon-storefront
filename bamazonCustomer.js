@@ -14,8 +14,7 @@ var connection = mysql.createConnection({
 connection.connect(function(err, res) {
   if (err) throw err;
   // selectAll();
-  inputOrder();
-  
+  inputOrder(); 
   });
 
 // function selectAll(){
@@ -39,18 +38,38 @@ function inputOrder (){
     },
 		])
 	 .then(function(answer) {
-	connection.query("SELECT * FROM products WHERE id=?", [answer.id], function(err, res) {
+		connection.query("SELECT * FROM products WHERE id=?", [answer.id], function(err, res) {
 		for (var i = 0; i < res.length; i++) {
-      console.log(res[i].id + " | " + res[i].item_id + " | " + res[i].product_name + " | " + res[i].department_name + " | " + res[i].price + " | " + res[i].stock_quantity);
+		var price = "$" +(answer.amt * res[i].price)+ ".00";
+		var item = res[i].product_name;
+		var itemID = answer.id;
+		var amount = answer.amt;
+     	// console.log(res[i].id + " | " + res[i].item_id + " | " + res[i].product_name + " | " + res[i].department_name + " | " + res[i].price + " | " + res[i].stock_quantity);
+     	// console.log("----------------------------------------------")
+     	// console.log("Your Order: ")
+     	// console.log("Item: " + res[i].product_name + "\nPrice: " + price);
 
-      	if (answer.amt > res[i].stock_quantity){
-      		console.log("insufficient quantity");
-      	}
+     	placeOrder(item, amount, price, itemID);
+      	// if (answer.amt > res[i].stock_quantity){
+      	// 	console.log("insufficient quantity");
+      	// }
     }
     })
   });
 };
 
+function placeOrder(item, amount, price, itemID){
+	var order = {
+		item: item,
+		amount: amount,
+		price: price,
+		id: itemID
+	}
+	 var orderArr = [];
+	orderArr.push(order);
+	console.log("Overview of your order: ")
+	console.log(orderArr);
+}
 
 
 
