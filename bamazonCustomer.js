@@ -41,7 +41,7 @@ function inputOrder (){
 	 .then(function(answer) {
 	connection.query("SELECT * FROM products WHERE id=?", [answer.id], function(err, res) {
 		for (var i = 0; i < res.length; i++) {
-      console.log(res[i].id + " | " + res[i].item_id + " | " + res[i].product_name + " | " + res[i].department_name);
+      console.log(res[i].id + " | " + res[i].item_id + " | " + res[i].product_name + " | " + res[i].department_name + " | " + res[i].price + " | " + res[i].stock_quantity);
     }
     })
   });
