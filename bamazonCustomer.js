@@ -1,5 +1,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
+require("console.table");
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -13,16 +14,34 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err, res) {
   if (err) throw err;
-  // selectAll();
-  inputOrder(); 
+  selectAll();
+  // inputOrder(); 
   });
 
-// function selectAll(){
-// 	connection.query("SELECT * FROM products", function(err, res) {
-//     if (err) throw err;
-//     console.log(res);
-// });
-// };
+function selectAll(){
+	connection.query("SELECT * FROM products", function(err, res) {
+    if (err) throw err;
+    console.table(res);
+    // console.log(res);
+    confirmInterest();
+});
+};
+
+function confirmInterest(){
+  inquirer.prompt ([{ 
+  type: 'confirm',
+  name: 'confirm',
+  message: 'Would you like to order something?'
+}])
+   .then(function(answer) {
+    if (answer.confirm = true){
+      inputOrder();
+    }
+  else {
+    console.log("Thank you, come again another time!");
+   }
+})
+}
 
 function inputOrder (){
 	inquirer.prompt ([
@@ -72,38 +91,23 @@ function placeOrder(item, amountRequested, amountInStock, price, itemID){
 		id: itemID
 	}
 	 var orderArr = [];
+	 var newAmt = amountInStock - amountRequested;
 	orderArr.push(order);
 	console.log("Overview of your order: ")
-	console.log(orderArr);
+	// console.log(orderArr);
+  updateDatabase(itemID, newAmt);
+  console.log(amountInStock);
+  console.log(newAmt);
+  console.log(orderArr);
 }
 
-function updateDatebase (item, amountRequested, amountInStock, price, itemID){
-	
+function updateDatabase (itemID, newAmt){ 
+connection.query("UPDATE products SET stock_quantity =? WHERE id=?", [newAmt, itemID], function(err, res) {
+console.log("This is your updated database:")
+selectAll();
+})
 }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 
-CONDITIONS
-if input value for product is an two integer:
-if input value for product id is not an integer:
-if id of product is correct and there is enough of product, place an order
-place an order = store that info into an order array? 
-if id is incorrect:
-if order is out of stock:
-*/
