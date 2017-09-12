@@ -21,6 +21,7 @@ connection.connect(function(err, res) {
 function selectAll() {
     connection.query("SELECT * FROM products", function(err, res) {
         if (err) throw err;
+        console.log("PRODUCTS:")
         console.table(res);
         // console.log(res);
         confirmInterest();
@@ -34,9 +35,10 @@ function confirmInterest() {
             message: 'Would you like to order something?'
         }])
         .then(function(answer) {
-            if (answer.confirm = true) {
+            if (answer.confirm === true) {
                 inputOrder();
-            } else {
+            } 
+            else if (answer.confirm === false) {
                 console.log("Thank you, come again another time!");
             }
         })
@@ -63,15 +65,15 @@ function inputOrder() {
                     var amountRequested = answer.amt;
                     var amountInStock = res[i].stock_quantity;
                     // console.log(res[i].id + " | " + res[i].item_id + " | " + res[i].product_name + " | " + res[i].department_name + " | " + res[i].price + " | " + res[i].stock_quantity);
-                    // console.log("----------------------------------------------")
-                    // console.log("Your Order: ")
-                    // console.log("Item: " + res[i].product_name + "\nPrice: " + price);
                     if (amountRequested > amountInStock) {
                         console.log("Insufficient Quantity");
                         inputOrder();
-                    } else {
+                    } else if (amountRequested <= amountInStock){
                         placeOrder(item, amountRequested, amountInStock, price, itemID);
                     }
+                      else {
+                        console.log("This is not valid input, please type in a number.");
+                      }
                     // if (answer.amt > res[i].stock_quantity){
                     //  console.log("insufficient quantity");
                     // }
@@ -93,7 +95,6 @@ function placeOrder(item, amountRequested, amountInStock, price, itemID) {
     console.log("Overview of your order: ")
     // console.log(orderArr);
     updateDatabase(itemID, newAmt);
-    console.log(amountInStock);
     console.log(newAmt);
     console.log(orderArr);
 }
@@ -108,6 +109,7 @@ function updateDatabase(itemID, newAmt) {
         })
     })
     confirmInterest();
+    selectALL();
 }
 
 
