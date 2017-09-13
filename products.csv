@@ -1,0 +1,11 @@
+id,item_id,product_name,department_name,price,stock_quantity
+1,01,"KKW Creme Contour & Highlight Kit",Cosmetics,54,912
+2,02,"Ostrich MacBook Charger",Technology,29,676
+3,03,"Soylent Meal Replacement","Grocery & Gourmet Food",37,986
+4,04,"iPhone 7 Waterproof Case","Cell Phones & Accessories",22,523
+5,05,"Desert Essence Organic Jojoba Oil","Beauty & Personal Care",11,350
+6,06,"History of Britain and Ireland",Books,20,20
+7,07,"Faber-Castell Wallet Pitt Penn Nibs Art Set",Pens,16,1
+8,08,"Sivian Health and Fitness Extra Thick Yoga Mat","Exercise & Fitness",19,572
+9,09,"Aztec Secret Healing Clay Deep Pore Cleansing","Beauty & Personal Care",9,79
+10,10,"Graphic Design: A New History, second edition",Books,44,23

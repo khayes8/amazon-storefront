@@ -14,8 +14,7 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err, res) {
     if (err) throw err;
-    selectAll();
-    // inputOrder(); 
+    selectAll();; 
 });
 
 function selectAll() {
@@ -23,7 +22,6 @@ function selectAll() {
         if (err) throw err;
         console.log("PRODUCTS:")
         console.table(res);
-        // console.log(res);
         confirmInterest();
     });
 };
@@ -93,24 +91,22 @@ function placeOrder(item, amountRequested, amountInStock, price, itemID) {
     var newAmt = amountInStock - amountRequested;
     orderArr.push(order);
     console.log("Overview of your order: ")
-    // console.log(orderArr);
-    updateDatabase(itemID, newAmt);
-    console.log(newAmt);
     console.log(orderArr);
+    updateDatabase(itemID, newAmt);
 }
 
 function updateDatabase(itemID, newAmt) {
-    connection.query("UPDATE products SET stock_quantity =? WHERE id=?", [newAmt, itemID], function(err, res) {
+    return new Promise(confirmInterest, () => {}, () => {
+        connection.query("UPDATE products SET stock_quantity =? WHERE id=?", [newAmt, itemID], function(err, res) {
         console.log("This is your updated database:")
         connection.query("SELECT * FROM products WHERE id=?", [itemID], function(err, res) {
             for (var i = 0; i < res.length; i++) {
                 console.log(res[i].id + " | " + res[i].item_id + " | " + res[i].product_name + " | " + res[i].department_name + " | " + res[i].price + " | " + res[i].stock_quantity)
             }
         })
+        })  
     })
-    confirmInterest();
-    selectALL();
-}
+ }
 
-
+    // confirmInterest();
 

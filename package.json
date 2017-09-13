@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/khayes8/amazon-storefront#readme",
   "dependencies": {
+    "console.table": "^0.9.1",
     "inquirer": "^3.2.3",
     "mysql": "^2.14.1"
   }
